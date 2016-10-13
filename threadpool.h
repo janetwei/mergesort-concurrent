@@ -11,7 +11,7 @@ typedef struct _task {
     struct _task *next, *last;
 } task_t;
 
-int task_free(task_t *the_task);
+void task_free(task_t *the_task);
 
 typedef struct {
     task_t *head, *tail;
@@ -20,11 +20,11 @@ typedef struct {
     uint32_t size;
 } tqueue_t;
 
-int tqueue_init(tqueue_t *the_queue);
+void tqueue_init(tqueue_t *the_queue);
 task_t *tqueue_pop(tqueue_t *the_queue);
 uint32_t tqueue_size(tqueue_t *the_queue);
-int tqueue_push(tqueue_t *the_queue, task_t *task);
-int tqueue_free(tqueue_t *the_queue);
+void tqueue_push(tqueue_t *the_queue, task_t *task);
+void tqueue_free(tqueue_t *the_queue);
 
 typedef struct {
     pthread_t *threads;
@@ -32,7 +32,7 @@ typedef struct {
     tqueue_t *queue;
 } tpool_t;
 
-int tpool_init(tpool_t *the_pool, uint32_t count, void *(*func)(void *));
-int tpool_free(tpool_t *the_pool);
+void tpool_init(tpool_t *the_pool, uint32_t count, void *(*func)(void *));
+void tpool_free(tpool_t *the_pool);
 
 #endif
